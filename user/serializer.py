@@ -6,8 +6,8 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("id", "email", "password", "name")
-        
+        fields = ("id", "email", "name", "is_superuser", "cv")
+        read_only_fields = ("is_staff", "is_superuser")
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
@@ -18,7 +18,7 @@ class AuthTokenSerializer(serializers.Serializer):
 
     email = serializers.CharField()
     password = serializers.CharField(
-    style={"input_type": "password"}, trim_whitespace=False
+        style={"input_type": "password"}, trim_whitespace=False
     )
 
     def validate(self, attrs):
@@ -33,9 +33,9 @@ class AuthTokenSerializer(serializers.Serializer):
             password=password,
         )
         if not user:
-            msg = ("unable to authenticate with provided credentials!")
+            msg = "unable to authenticate with provided credentials!"
             raise serializers.ValidationError(msg, code="authentication")
 
         attrs["user"] = user
+        print(attrs)
         return attrs
-    

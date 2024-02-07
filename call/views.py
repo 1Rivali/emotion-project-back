@@ -1,6 +1,5 @@
 from .serializer import CallSerializer
 from .models import Call
-from django.shortcuts import render
 from rest_framework.permissions import IsAdminUser
 from rest_framework import generics
 

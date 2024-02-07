@@ -7,8 +7,8 @@ from user.models import User
 
 
 class Call(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_id")
-    company_id = models.ForeignKey(
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_id")
+    company = models.ForeignKey(
         Company, on_delete=models.CASCADE, related_name="company"
     )
     url = models.TextField()

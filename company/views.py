@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser
-from .serializer import CompanySrializer
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from .serializer import CompanySerializer
 
 from .models import Company
 
@@ -9,16 +10,18 @@ from .models import Company
 
 
 class CompanyCreateAPIView(generics.CreateAPIView):
-    serializer_class = CompanySrializer
+    serializer_class = CompanySerializer
     permission_classes = [IsAdminUser]
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
 
 class CompanyListAPIView(generics.ListAPIView):
     queryset = Company.objects.all()
-    serializer_class = CompanySrializer
+    serializer_class = CompanySerializer
 
 
 class CompanyUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Company.objects.all()
-    serializer_class = CompanySrializer
+    serializer_class = CompanySerializer
     permission_classes = [IsAdminUser]
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
