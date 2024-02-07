@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from company.models import Company
@@ -12,3 +13,11 @@ class Job(models.Model):
     )
     count_applicants = models.IntegerField(null=False)
     applicants = models.ManyToManyField(User, blank=True)
+
+    def apply(self, user):
+        if not self.applicants.filter(pk=user.pk).exists():
+            self.applicants.add(user)
+            self.count_applicants += 1
+            self.save()
+        else:
+            raise ValidationError("User has already applied to this job.")

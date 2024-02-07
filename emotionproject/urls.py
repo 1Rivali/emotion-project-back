@@ -22,22 +22,26 @@ from django.conf import settings
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
 from rest_framework_swagger.views import get_swagger_view
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path(
-        "schema/",
-        SpectacularAPIView.as_view(),
-        name="schema",
-    ),
-    path(
-        "docs/",
-        SpectacularSwaggerView.as_view(
-            template_name="swagger-ui.html", url_name="schema"
+urlpatterns = (
+    [
+        path("admin/", admin.site.urls),
+        path(
+            "schema/",
+            SpectacularAPIView.as_view(),
+            name="schema",
         ),
-    ),
-    path("job/", include("job.urls")),
-    path("payment/", include("payment.urls")),
-    path("company/", include("company.urls")),
-    path("call/", include("call.urls")),
-    path("auth/", include("user.urls")),
-] + static(settings.STATIC_URL)
+        path(
+            "docs/",
+            SpectacularSwaggerView.as_view(
+                template_name="swagger-ui.html", url_name="schema"
+            ),
+        ),
+        path("job/", include("job.urls")),
+        path("payment/", include("payment.urls")),
+        path("company/", include("company.urls")),
+        path("call/", include("call.urls")),
+        path("auth/", include("user.urls")),
+    ]
+    + static(settings.STATIC_URL)
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+)

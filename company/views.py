@@ -12,7 +12,6 @@ from .models import Company
 class CompanyCreateAPIView(generics.CreateAPIView):
     serializer_class = CompanySerializer
     permission_classes = [IsAdminUser]
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
 
 class CompanyListAPIView(generics.ListAPIView):
@@ -24,4 +23,3 @@ class CompanyUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
     permission_classes = [IsAdminUser]
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
