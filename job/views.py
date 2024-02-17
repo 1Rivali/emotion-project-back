@@ -4,7 +4,7 @@ from rest_framework import generics, status
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from .models import Job
-from .serializer import JobSerializer
+from .serializer import JobSerializer, CreateJobSerializer
 from rest_framework.response import Response
 
 
@@ -13,7 +13,7 @@ from rest_framework.response import Response
 
 class JobCreateView(generics.CreateAPIView):
     queryset = Job.objects.all()
-    serializer_class = JobSerializer
+    serializer_class = CreateJobSerializer
     permission_classes = [IsAdminUser]
 
 

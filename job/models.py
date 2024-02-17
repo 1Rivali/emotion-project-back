@@ -11,8 +11,8 @@ class Job(models.Model):
     company = models.ForeignKey(
         Company, on_delete=models.CASCADE, related_name="company_jobs"
     )
-    count_applicants = models.IntegerField(null=False)
-    applicants = models.ManyToManyField(User, blank=True)
+    count_applicants = models.IntegerField(default=0)
+    applicants = models.ManyToManyField(User, null=True, blank=True)
 
     def apply(self, user):
         if not self.applicants.filter(pk=user.pk).exists():

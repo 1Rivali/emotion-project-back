@@ -7,7 +7,7 @@ from user.models import User
 
 
 class Call(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_id")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
     company = models.ForeignKey(
         Company, on_delete=models.CASCADE, related_name="company"
     )

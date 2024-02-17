@@ -13,7 +13,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
 class JobSerializer(serializers.ModelSerializer):
     company = CompanySerializer(read_only=True)
-    applicants = UserSerializer(many=True)
+    applicants = UserSerializer(many=True, read_only=True)
 
     class Meta:
         model = Job
@@ -28,3 +28,10 @@ class JobSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Job.objects.create(**validated_data)
+
+
+class CreateJobSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Job
+        fields = "__all__"
+        read_only_fields = ["count_applicants", "applicants"]

@@ -6,4 +6,6 @@ from company.models import Company
 
 class Payment(models.Model):
     amount = models.IntegerField(null=False)
-    company_id = models.ForeignKey(Company, on_delete=models.CASCADE,related_name='company_payment')
+    company = models.ForeignKey(
+        Company, on_delete=models.CASCADE, related_name="company_payment"
+    )

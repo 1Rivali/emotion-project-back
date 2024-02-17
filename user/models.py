@@ -19,10 +19,10 @@ def user_cv_file_path(instance, filename):
 
 class UserManager(BaseUserManager):
     def create_user(
-            self,
-            email: str,
-            password: str = None,
-            **extra_fields: dict,
+        self,
+        email: str,
+        password: str = None,
+        **extra_fields: dict,
     ) -> object:
         """Creates and saves a new user"""
         if not email:
@@ -49,7 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     address = models.TextField()
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False, )
+    is_superuser = models.BooleanField(default=False)
     cv = models.FileField(null=True, upload_to=user_cv_file_path)
     objects = UserManager()
     USERNAME_FIELD = "email"

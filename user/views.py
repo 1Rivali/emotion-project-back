@@ -67,3 +67,9 @@ class ListUsersView(generics.ListAPIView):
         authentication.TokenAuthentication,
         authentication.SessionAuthentication,
     )
+
+
+class DeleteView(generics.DestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAdminUser]

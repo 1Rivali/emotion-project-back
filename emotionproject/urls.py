@@ -20,7 +20,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
-from rest_framework_swagger.views import get_swagger_view
+
 
 urlpatterns = (
     [

@@ -22,9 +22,15 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class CallSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    company = CompanySerializer(read_only=True)
+    user = UserSerializer()
+    company = CompanySerializer()
 
     class Meta:
         model = Call
         fields = ["id", "url", "started_at", "user", "company"]
+
+
+class CallCreateUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Call
+        fields = "__all__"
